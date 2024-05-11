@@ -1,0 +1,71 @@
+/* static/style.css */
+
+body {
+	font-family: 'Poppins', sans-serif;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+}
+.container {
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	background: url('../static/images/icon.svg');
+	background-repeat: no-repeat;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+	margin-top: 0;
+	color: #333;
+}
+#quote {
+	font-size: 20px;
+	margin: 20px 0;
+}
+button {
+	padding: 10px 20px;
+	font-size: 16px;
+	margin: 0 10px;
+	cursor: pointer;
+}
+.form-group {
+	margin-bottom: 20px;
+}
+.form-group input[type="text"],
+.form-group input[type="password"] {
+	width: 75%;
+	padding: 10px;
+	font-size: 1em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+.form-group input[type="submit"] {
+	width: 80%;
+	padding: 10px;
+	font-size: 1em;
+	color: #fff;
+	background-color: #007bff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.flash-messages {
+	list-style: none;
+	padding: 0;
+}
+.flash-messages li {
+	margin-bottom: 10px;
+}
+.flash-messages .error {
+	color: #dc3545;
+}
+.flash-messages .success {
+	color: #28a745;
+}
+a {
+	color: #007bff;
+}
