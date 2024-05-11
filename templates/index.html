@@ -4,20 +4,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Dashboard</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sytle.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
 	<div class="container">
 		<h1>CITA</h1>
 		<link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
 		<p id="quote">{{ quote }}</p>
-		<button id="prevBtn"><<</button>
-		<button id="nextBtn">>></button>
-		<a href="{{ url_for('logout') }}">Logout</a>
+		<button id="prevBtn">prev</button>
+		<button id="nextBtn">next</button>
 	</div>
-	
-	<script src="{{ url_for('static', filename='script.js') }}"></script>
+	<a href="{{ url_for('logout') }}">Logout</a>
 </body>
 </html>
