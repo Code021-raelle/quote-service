@@ -4,11 +4,13 @@ from flask_login import LoginManager, login_user, logout_user, login_required, U
 from forms import LoginForm, RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from pyfcm import FCMNotification
 import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gabson'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:gabriel@localhost/hbnb_dev_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db'
+push_service = FCMNotification(api_key="your_firebase_server_key")
 
 quotes = []
 
@@ -103,6 +105,28 @@ def prev_quote():
     if len(quotes) > 1:
         quotes.pop()
     return jsonify({'quote': quotes[-1]})
+
+
+@app.route('/send-notification', methods=['POST'])
+def send_push_notification():
+    data = request.get_json()
+    registration_id = data.get('registration_id')
+    title = data.get('title')
+    body = data.get('body')
+
+    if not registration_id or not title or not body:
+        return jsonify({"error": "Missing data"}), 400
+
+    message = {
+            "registration_ids": [registration_id],
+            "notification": {
+                "title": title,
+                "body": body
+            }
+    }
+    result = push_service.notify_single_device(**message)
+    print(result)
+    return jsonify({"message": "Notigication sent successfully"}), 200
 
 
 if __name__ == '__main__':
