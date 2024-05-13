@@ -12,6 +12,8 @@ body {
 	max-width: 600px;
 	margin: 0 auto;
 	padding: 20px;
+	justify-content: center;
+	top: 20px;
 	background: url('../static/images/icon.svg');
 	background-repeat: no-repeat;
 	background-color: #fff;
