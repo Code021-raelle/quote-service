@@ -6,9 +6,24 @@
 	<title>Register</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">
+			<img src="{{ url_for('static', filename='images/icon.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+		</a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="center-container">
+		<div class="container-home">
 			    <h1 class="title">Register</h1>
 			    {% with messages = get_flashed_messages() %}
 	    			{% if messages %}
@@ -38,6 +53,7 @@
 	    			</div>
 			    </form>
 			    <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+		</div>
 	</div>
 </body>
 </html>

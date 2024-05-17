@@ -1,15 +1,23 @@
 #!/usr/bin/python3
-from flask import Flask, render_template, jsonify, redirect, url_for, flash
+from flask import Flask, render_template, jsonify, redirect, url_for, flash, request
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
 from forms import LoginForm, RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from pyfcm import FCMNotification
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 import requests
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gabson'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'youremail@gmail.com'
+app.config['MAIL_PASSWORD'] = 'yourpassword'
 push_service = FCMNotification(api_key="your_firebase_server_key")
 
 quotes = []
@@ -17,18 +25,23 @@ quotes = []
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+mail = Mail(app)
+s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.String(150), nullable=False)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def get_id(self):
+        return self.id
 
 
 @login_manager.user_loader
@@ -81,6 +94,45 @@ def register():
     return render_template('register.html', form=form)
 
 
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            token = s.dumps(email, salt='password-reset-salt')
+            link = url_for('reset_password', token=token, _external=True)
+            msg = Message('Password Reset Request', sender='noreply@demo.com', recipients=[email])
+            msg.body = f'Your link to reset your password is {link}. This link will expire in 1 hour.'
+            mail.send(msg)
+            flash('A password reset link has been sent to your email.', 'info')
+        else:
+            flash('No account found with that email.', 'warning')
+        return redirect(url_for('forgot_password'))
+    return render_template('forgot_password.html')
+
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    try:
+        email = s.loads(token, salt='password-reset-salt', max_age=3600)
+    except SignatureExpired:
+        return '<h1>The token is expired!</h1>'
+    except BadSignature:
+        return '<h1>Invalid token!</h1>'
+
+    if request.method == 'POST':
+        password = request.form.get('password')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            user.set_password(password)
+            db.session.commit()
+            flash('Your password has been updated!', 'success')
+            return redirect(url_for('login'))
+
+    return render_template('reset_password.html')
+
+
 def fetch_quote():
     response = requests.get('https://zenquotes.io/api/random')
     quote = response.json()[0]['q']
@@ -126,7 +178,7 @@ def send_push_notification():
     }
     result = push_service.notify_single_device(**message)
     print(result)
-    return jsonify({"message": "Notigication sent successfully"}), 200
+    return jsonify({"message": "Notification sent successfully"}), 200
 
 
 if __name__ == '__main__':
