@@ -3,16 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dashboard</title>
+	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
-<body>
+<body class="gradient-background">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">
+		<a class="navbar-brand" href="/">
 			<img src="{{ url_for('static', filename='images/icon.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
 		</a>
 		<div class="collapse navbar-collapse" id="navbarNav">
@@ -25,11 +26,12 @@
 	</nav>
 
 	<div class="center-container">
-	   <div class="container-home">
-				   <h1 class="title">CITA<link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}"></h1>
-				   <p id="quote">{{ quote }}</p>
+	   <div class="container-home kgradient-background">
+		   <h1 class="title">C<i>iTa</i></h1>
+		   <p id="quote">{{ quote }}</p>
 				   <button id="prevBtn">prev</button>
 				   <button id="nextBtn">next</button>
+				   <!--<i class="bi bi-type" id="fontToggle" style="cursor: pointer;"></i>-->
 	   </div>
 	</div>
 

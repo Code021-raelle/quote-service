@@ -22,3 +22,13 @@ document.addEventListener('keydown', function(event) {
 	}
 });
 
+let currentFontStyle = 0;
+const fontStyles = ['font-style-1', 'font-style-2', 'font-style-3'];
+
+document.getElementById('fontToggle').addEventListener('click', () => {
+	const quoteContainer = document.getElementById('quoteContainer');
+	quoteContainer.classList.remove(...fontStyles);
+	currentFontStyle = (currentFontStyle + 1) % fontStyle.length;
+	quoteContainer.classList.add(fontStyle[currentFontStyle]);
+});
+
