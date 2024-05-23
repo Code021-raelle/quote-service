@@ -1,2 +1,2 @@
-bind = "0.0.0.0:8000"
+bind = "http://code021.tech"
 workers = 3

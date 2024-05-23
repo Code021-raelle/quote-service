@@ -16,7 +16,7 @@
 	box-sizing: border-box;
 }
 body {
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins';
 	text-align: center;
 	margin: 0;
 	padding: 0;
@@ -52,6 +52,14 @@ nav {
 	background-color: #E2D280;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.center-container-index {
+	min-height: 88vh;
+        max-width: 525px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
 }
 .center-container {
 	min-height: 88vh;
@@ -91,10 +99,10 @@ button {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 #prevBtn:hover {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 #nextBtn:hover {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 .form-group {
 	margin-bottom: 20px;

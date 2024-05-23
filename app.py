@@ -155,7 +155,7 @@ def home():
 @app.route('/next')
 def next_quote():
     fetch_quote()
-    return jsonify({'quote': quotes[-1]})
+    return jsonify({'quote': quotes[+1]})
 
 @app.route('/prev')
 def prev_quote():
@@ -167,7 +167,7 @@ def prev_quote():
 @app.route('/send-notification', methods=['POST'])
 def send_push_notification():
     data = request.get_json()
-    registration_id = data.get('registration_id')
+    registration_id = data.get('email')
     title = data.get('title')
     body = data.get('body')
 
@@ -187,4 +187,4 @@ def send_push_notification():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
