@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About CITA</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="icon/svg" href="{{ url_for ('static', filename='images/icon.svg') }}">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                            <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='images/icon.svg') }}"></a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                        <a href="{{ url_for('dashboard') }}" class="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-gray-900">About CITA</h1>
+                <p class="mt-4 text-xl text-gray-600">CITA: The Power of Quotes in Inspiring and Motivating Lives</p>
+            </div>
+
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-gray-900">What is CITA?</h2>
+                <p class="mt-4 text-gray-600">CITA, derived from the Spanish word for quotes, embodies the essence of capturing wisdom, inspiration, and motivation in a few powerful words. Our mission is to curate and share quotes that resonate with people's experiences, challenges, and aspirations, offering a spark of inspiration when needed the most.</p>
+            </div>
+
+            <div class="mt-10 grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-900">Boosts Motivation</h3>
+                    <p class="mt-2 text-gray-600">Quotes can provide a quick and timely boost to our motivation levels, helping us to stay focused and driven toward our goals.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-900">Encourages Positive Thinking</h3>
+                    <p class="mt-2 text-gray-600">Reading inspirational quotes can foster a positive mindset, encouraging us to look at the brighter side of life and overcome negativity.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-900">Provides Clarity</h3>
+                    <p class="mt-2 text-gray-600">Quotes can distill complex ideas and emotions into simple, clear messages, helping us gain perspective and clarity in difficult times.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-900">Offers Comfort</h3>
+                    <p class="mt-2 text-gray-600">In times of distress or sadness, quotes can offer comfort and solace, reminding us that we are not alone in our struggles.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-900">Stimulates Reflection</h3>
+                    <p class="mt-2 text-gray-600">Quotes can prompt us to reflect on our lives, our choices, and our values, leading to deeper self-awareness and personal growth.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-900">Enhances Creativity</h3>
+                    <p class="mt-2 text-gray-600">Inspirational quotes can ignite our creativity, encouraging us to think outside the box and approach problems with fresh perspectives.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
+

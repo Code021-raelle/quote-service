@@ -14,14 +14,33 @@ body {
 	height: 100%;
 	margin: 0;
 	font-family: 'Georgia';
-	background-image: url('../static/images/background.svg');
+	background: url('../static/images/background.svg') no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+}
+.contain {
+	/*width: 100%;*/
+	display: flex;
+	height: 75vh;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+h1 {
+	font-size: 6rem;
+	text-align: center;
+	justify-content: center;
+}
+span {
+	color: #fff724;
 }
 
-/*@keyframes rotateGradient {
-        0% {background-position: 0% 50%;}
-        100% {background-position: 100% 50%;}
+@keyframes blink {
+        0%, 50% { opacity: 1; }
+        50.01%, 100% { opacity: 0; }
 }
-.gradient-background {
+/*.gradient-background {
         width: 100%;
         height: 100vh;
         background: repeating-linear-gradient(

@@ -164,6 +164,16 @@ def prev_quote():
     return jsonify({'quote': quotes[-1]})
 
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+@app.route('/review')
+def review():
+    return render_template('review.html')
+
+
 @app.route('/send-notification', methods=['POST'])
 def send_push_notification():
     data = request.get_json()

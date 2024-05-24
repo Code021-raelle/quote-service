@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews Section</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMzFn2H1pt2OXoQRoTflA5VEO1pAJfF18B3v8T9" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='review.js') }}"></script>
+</head>
+<body class="bg-gray-100">
+
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+			    <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='images/icon.svg') }}"></a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+			<a href="{{ url_for('dashboard') }}" class="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Customer Reviews</h2>
+        
+        <!-- Add Review Form -->
+        <form id="review-form" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+            </div>
+            <div class="mb-4">
+                <label for="job" class="block text-sm font-medium text-gray-700">Job Title</label>
+                <input type="text" id="job" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+            </div>
+            <div class="mb-4">
+                <label for="avatar" class="block text-sm font-medium text-gray-700">Avatar URL</label>
+                <input type="file" id="avatar" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+            </div>
+            <div class="mb-4">
+                <label for="rating" class="block text-sm font-medium text-gray-700">Rating</label>
+                <select id="rating" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                    <option value="5">5 Stars</option>
+                    <option value="4.5">4.5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3.5">3.5 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2.5">2.5 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1.5">1.5 Stars</option>
+                    <option value="1">1 Star</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="review" class="block text-sm font-medium text-gray-700">Review</label>
+                <textarea id="review" class="mt-1 block w-full border border-gray-300 rounded-md p-2" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md">Submit Review</button>
+        </form>
+
+        <div id="reviews-container" class="grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+            <!-- Existing reviews go here -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img class="w-12 h-12 rounded-full object-cover" src="moon.jpg" alt="moon">
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-900">Gabby</h3>
+                        <p class="text-gray-600">Software engineer</p>
+                        <div class="flex items-center mt-2">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700">This is a fantastic site! I've been using it for a while and it has greatly inspired me to improve in my workflows.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img class="w-12 h-12 rounded-full object-cover" src="star.jpg" alt="star">
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-900">Dayo</h3>
+                        <p class="text-gray-600">Directorate</p>
+                        <div class="flex items-center mt-2">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star-half-alt text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700">Amazing service! The quotes motivated me to keep going and never give up hope.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img class="w-12 h-12 rounded-full object-cover" src="sky.jpg" alt="sky">
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-900">Emmanuel</h3>
+                        <p class="text-gray-600">Evangelist</p>
+                        <div class="flex items-center mt-2">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700">Highly recommend this product! It exceeded my expectations and the quality is top-notch.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

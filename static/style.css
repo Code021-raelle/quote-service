@@ -14,20 +14,30 @@
 
 * {
 	box-sizing: border-box;
+	text-decoration: none;
 }
 body {
 	font-family: 'Poppins';
 	text-align: center;
 	margin: 0;
 	padding: 0;
-	background-color: gold;
+	background-color: #f4f4f4;
 }
-nav {
-	background-color: #E2D280;
+/*nav {
+	background-color: #fff;
+	list-style: none;
+	/*display: inline-block;
+	position: fixed;
+	width: 100%;
+	padding: 1.5rem;
+	z-index: 998;
+	font-family: 'Monospace';
+	transition: all 0.3s ease;
+	text-align: center;
 }
 .navbar {
 	position: sticky;
-}
+}*/
 .container {
 	width: 100%;
 	height: 100%;
@@ -109,7 +119,7 @@ button {
 }
 .form-group input[type="text"],
 .form-group input[type="password"] {
-	width: 75%;
+	width: 80%;
 	padding: 10px;
 	font-size: 1em;
 	border: 1px solid #e2d280;
