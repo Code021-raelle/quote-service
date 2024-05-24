@@ -1,4 +1,4 @@
-/* static/style.css */
+/* static/style.css 
 .font-style-1 {
 	font-family: 'Georgia', serif;
 	font-size: 1.5em;
@@ -10,7 +10,7 @@
 .font-style-3 {
 	font-family: 'Courier New', monospace;
 	font-size: 1.5em;
-}
+}*/
 
 * {
 	box-sizing: border-box;
@@ -165,4 +165,33 @@ a {
 	background: linear-gradient(90deg, #E2D280, #ff7e5f, #feb47b);
 	background-size: 200% 200%;
 	animation: rotateGradient 10s ease infinite;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablets and Larger */
+@media only screen and (min-width: 768px) {
+	.container {
+		max-width: 600px;
+	}
+}
+
+/* Phones */
+@media only screen and (max-width: 576px) {
+	.container {
+		padding: 10px;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	#quote {
+		font-size: 1em;
+	}
+
+	.center-container-index,
+	.center-container {
+		max-width: 300px;
+	}
 }

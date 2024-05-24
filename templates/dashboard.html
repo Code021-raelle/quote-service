@@ -9,8 +9,10 @@
 	<link rel="icon" type="icon/svg" href="{{ url_for ('static', filename='images/icon.svg') }}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='images/icon.svg') }}"></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="{{ url_for('dashboard') }}">
+		<img src="{{ url_for('static', filename='images/icon.svg') }}" alt="Logo" style="height: 40px;">
+	</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -37,7 +39,7 @@
 		</div>
 	</nav>
 
-	<div class="contain">
+	<div class="container text-center mt-5">
 		<h1> Welcome <span class="auto-type"></span></h1>
 	</div>
 
@@ -50,7 +52,7 @@
 			strings : ["to CiTa Dashboard", "to Discovering Your Daily Inspirations", "to your Personal Quote Companion", "to the Daily Dose of Motivation", "in Unlocking Wisdom with Every Tap", "to the Space of Inspirations."],
         		typeSpeed : 150,
         		backSpeed : 150,
-        		looped : true
+        		loop : true
 		})
 	</script>
 </body>
