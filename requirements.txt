@@ -74,7 +74,6 @@ six==1.16.0
 smmap==5.0.1
 SQLAlchemy==2.0.28
 supervisor==4.2.1
-systemd-python==234
 tomli==2.0.1
 typing_extensions==4.10.0
 ubuntu-advantage-tools==8001
