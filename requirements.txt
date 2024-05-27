@@ -54,6 +54,7 @@ parsedatetime==2.6
 pathlib2==2.3.7.post1
 platformdirs==2.5.1
 pycodestyle==2.8.0
+ss
 pyfcm==1.5.4
 PyGObject==3.42.1
 PyICU==2.8.1
