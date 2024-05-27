@@ -12,11 +12,11 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gabson'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mariadb+pymysql://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'gabrielakinshola021@gmail.com'
+app.config['MAIL_USERNAME'] = 'email'
 app.config['MAIL_PASSWORD'] = 'yourpassword'
 push_service = FCMNotification(api_key="your_firebase_server_key")
 
