@@ -24,7 +24,6 @@ Flask-Login==0.6.3
 Flask-Mail==0.9.1
 Flask-SQLAlchemy==3.1.1
 Flask-WTF==1.2.1
-frappe-bench==5.19.0
 gitdb==4.0.11
 GitPython==3.1.40
 greenlet==3.0.3
@@ -63,9 +62,11 @@ PyNaCl==1.5.0
 pyOpenSSL==21.0.0
 pyparsing==2.4.7
 pyRFC3339==1.1
+python-apt==2.4.0+ubuntu2
 python-crontab==2.6.0
 python-dateutil==2.8.2
 pytz==2022.1
+PyYAML==5.4.1
 requests==2.31.0
 requests-toolbelt==0.9.1
 SecretStorage==3.3.1
