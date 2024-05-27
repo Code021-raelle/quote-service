@@ -76,7 +76,6 @@ SQLAlchemy==2.0.28
 supervisor==4.2.1
 tomli==2.0.1
 typing_extensions==4.10.0
-ufw==0.36.1
 unattended-upgrades==0.1
 urllib3==2.1.0
 virtualenv==20.13.0+ds
