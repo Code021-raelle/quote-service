@@ -61,9 +61,9 @@ def login():
             login_user(user, remember=remember)
             flash('Logged in successfully.', 'success')
             return redirect(url_for('home'))
-        else:
+        """else:
             flash('Invalid email or password.', 'error')
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form)"""
 
 
 @app.route('/logout')
