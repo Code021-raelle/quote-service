@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="{{ url_for('dashboard') }}">
+			<img src="{{ url_for('static', filename='images/icon.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+		</a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<b><a class="nav-link" href="{{ url_for ('dashboard') }}">Dashboard</a></b>
+				</li>
+			</ul>
+		</div>
+	</nav>
+    <div class="center-container">
+		<div class="container-home">
+            <h1>Admin Login</h1>
+            <form method="POST" action="{{ url_for('admin_login') }}">
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.email.label }} {{ form.email(size=32) }}
+                </div>
+                <div>
+                    {{ form.password.label }} {{ form.password(size=32) }}
+                </div>
+                <div>
+                    {{ form.remember_me.label }} {{ form.remember_me() }}
+                </div>
+                <div>
+                    {{ form.submit() }}
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
