@@ -194,4 +194,8 @@ a {
 	.center-container {
 		max-width: 300px;
 	}
+
+	.form-group input[type="submit"] {
+		width: 20%;
+	}
 }
