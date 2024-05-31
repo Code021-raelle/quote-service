@@ -60,7 +60,7 @@ def login():
         if user and user.check_password(password):
             login_user(user, remember=remember)
             flash('Logged in successfully.', 'success')
-    return redirect(url_for('home'))
+        return redirect(url_for('home'))
         # else:
         #    flash('Invalid email or password.', 'error')
     #return render_template('login.html', form=form)
