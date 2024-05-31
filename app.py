@@ -55,7 +55,7 @@ class User(UserMixin, db.Model):
         return self.id
     
 
-@app.before_first_request
+@app._got_first_request
 def create_default_admin():
     admin_email = os.getenv('ADMIN_EMAIL', 'admin@example.com')
     admin_password = os.getenv('ADMIN_PASSWORD', 'password')
