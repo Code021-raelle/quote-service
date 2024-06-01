@@ -9,11 +9,12 @@ from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from functools import wraps
 import requests
+import psycopg2
 import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gabson'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hbnb_dev:ezzicZloooY65xKOArE6e03bfoXT4n77@dpg-cpctfplds78s738t12j0-a.oregon-postgres.render.com/hbnb_dev_db';
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -30,20 +31,20 @@ mail = Mail(app)
 s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 
 
-def admin_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not current_user.is_admin:
-            abort(403)
-        return f(*args, **kwargs)
-    return decorated_function
+#def admin_required(f):
+#    @wraps(f)
+ #   def decorated_function(*args, **kwargs):
+  #      if not current_user.is_admin:
+   #         abort(403)
+    #    return f(*args, **kwargs)
+   # return decorated_function
 
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(150), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
+    #is_admin = db.Column(db.Boolean, default=False)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -56,39 +57,39 @@ class User(UserMixin, db.Model):
     
 
 #@app.before_first_request
-def create_default_admin():
-    admin_email = os.getenv('ADMIN_EMAIL', 'admin@example.com')
-    admin_password = os.getenv('ADMIN_PASSWORD', 'password')
-    admin_user = User.query.filter_by(email=admin_email).first()
-    if not admin_user:
-        new_admin = User(email=admin_email, is_admin=True)
-        new_admin.set_password(admin_password)
-        db.session.add(new_admin)
-        db.session.commit()
-        print('Default admin user created')
+#def create_default_admin():
+ #   admin_email = os.getenv('ADMIN_EMAIL', 'admin@example.com')
+  #  admin_password = os.getenv('ADMIN_PASSWORD', 'password')
+   # admin_user = User.query.filter_by(email=admin_email).first()
+   # if not admin_user:
+    #    new_admin = User(email=admin_email, is_admin=True)
+     #   new_admin.set_password(admin_password)
+     #   db.session.add(new_admin)
+      #  db.session.commit()
+       # print('Default admin user created')
 
 
-@app.route('/admin')
-@login_required
-@admin_required
-def admin_dashboard():
-    return render_template('admin_dashboard.html')
+#@app.route('/admin')
+#@login_required
+#@admin_required
+#def admin_dashboard():
+ #   return render_template('admin_dashboard.html')
 
 
-@app.route('/admin_login', methods=['GET', 'POST'])
-def admin_login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-        user = User.query.filter_by(email=email, is_admin=True).first()
-        if user and user.check_password(password):
-            login_user(user)
-            flash('Logged in as admin successfully.', 'success')
-            return redirect(url_for('admin_dashboard'))
-        else:
-            flash('Invalid admin credentials.', 'error')
-    return render_template('admin_login.html', form=form)
+#@app.route('/admin_login', methods=['GET', 'POST'])
+#def admin_login():
+#    form = LoginForm()
+#    if form.validate_on_submit():
+#        email = form.email.data
+#        password = form.password.data
+#        user = User.query.filter_by(email=email, is_admin=True).first()
+#        if user and user.check_password(password):
+#            login_user(user)
+#            flash('Logged in as admin successfully.', 'success')
+#            return redirect(url_for('admin_dashboard'))
+#        else:
+#            flash('Invalid admin credentials.', 'error')
+#    return render_template('admin_login.html', form=form)
 
 
 @login_manager.user_loader
@@ -127,13 +128,13 @@ def register():
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data
-        is_admin = form.is_admin.data if current_user.is_admin else False
+        #is_admin = form.is_admin.data if current_user.is_admin else False
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
             flash('Email already registered. Please login.', 'error')
             return redirect(url_for('login'))
         else:
-            new_user = User(email=email, is_admin=is_admin)
+            new_user = User(email=email)
             new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
