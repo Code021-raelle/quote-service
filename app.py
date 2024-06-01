@@ -204,7 +204,7 @@ def home():
 @app.route('/next')
 def next_quote():
     fetch_quote()
-    return jsonify({'quote': quotes[+1]})
+    return jsonify({'quote': quotes[-1]})
 
 @app.route('/prev')
 def prev_quote():
