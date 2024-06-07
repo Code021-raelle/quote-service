@@ -262,10 +262,23 @@ def save_reviews(reviews):
 
 @app.route('/submit_review', methods=['POST'])
 def submit_review():
-    review = request.get_json()
+    if 'avatar' in request.files:
+        avatar = request.files['avatar']
+        if avatar.filename != '':
+            avatar.save(os.path.join('static/uploads', avatar.filename))
+    
+    review = {
+        'name': request.form.get('name'),
+        'job': request.form.get('job'),
+        'avatar': avatar.filename if 'avatar' in request.files else '',  # Save the filename
+        'rating': request.form.get('rating'),
+        'review': request.form.get('review')
+    }
+    
     reviews = load_reviews()
     reviews.append(review)
     save_reviews(reviews)
+    
     return jsonify({'success': True})
 
 
