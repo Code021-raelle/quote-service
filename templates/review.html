@@ -7,9 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMzFn2H1pt2OXoQRoTflA5VEO1pAJfF18B3v8T9" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='review.js') }}"></script>
 </head>
 <body class="bg-gray-100">
-
     <nav class="bg-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -24,27 +24,26 @@
             </div>
         </div>
     </nav>
-
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Customer Reviews</h2>
         
         <!-- Add Review Form -->
-        <form id="review-form" class="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <form id="review-form" class="bg-white p-6 rounded-lg shadow-lg mb-8" enctype="multipart/form-data">
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" id="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
             </div>
             <div class="mb-4">
                 <label for="job" class="block text-sm font-medium text-gray-700">Job Title</label>
-                <input type="text" id="job" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <input type="text" id="job" name="job" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
             </div>
             <div class="mb-4">
                 <label for="avatar" class="block text-sm font-medium text-gray-700">Avatar URL</label>
-                <input type="file" id="avatar" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+                <input type="file" id="avatar" name="avatar" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
             </div>
             <div class="mb-4">
                 <label for="rating" class="block text-sm font-medium text-gray-700">Rating</label>
-                <select id="rating" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <select id="rating" name="rating" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
                     <option value="5">5 Stars</option>
                     <option value="4.5">4.5 Stars</option>
                     <option value="4">4 Stars</option>
@@ -58,13 +57,12 @@
             </div>
             <div class="mb-4">
                 <label for="review" class="block text-sm font-medium text-gray-700">Review</label>
-                <textarea id="review" class="mt-1 block w-full border border-gray-300 rounded-md p-2" rows="3" required></textarea>
+                <textarea id="review" name="review" class="mt-1 block w-full border border-gray-300 rounded-md p-2" rows="3" required></textarea>
             </div>
             <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md">Submit Review</button>
         </form>
 
         <div id="reviews-container" class="grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-            <!-- Existing reviews will be populated here -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
                 <div class="flex items-center mb-4">
                     <img class="w-12 h-12 rounded-full object-cover" src="moon.jpg" alt="moon">
@@ -116,58 +114,30 @@
                 </div>
                 <p class="text-gray-700">Highly recommend this product! It exceeded my expectations and the quality is top-notch.</p>
             </div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('review-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const job = document.getElementById('job').value;
-            const avatar = document.getElementById('avatar').files[0];
-            const rating = document.getElementById('rating').value;
-            const review = document.getElementById('review').value;
-
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('job', job);
-            formData.append('avatar', avatar);
-            formData.append('rating', rating);
-            formData.append('review', review);
-
-            fetch('/submit_review', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    addReviewToDOM(name, job, rating, review);
-                    document.getElementById('review-form').reset();
-                }
-            });
-        });
-
-        function addReviewToDOM(name, job, rating, review) {
-            const reviewsContainer = document.getElementById('reviews-container');
-            const reviewDiv = document.createElement('div');
-            reviewDiv.className = 'bg-white p-6 rounded-lg shadow-lg';
-            reviewDiv.innerHTML = `
-                <div class="flex items-center mb-4">
-                    <img class="w-12 h-12 rounded-full object-cover" src="${avatar}" alt="${name}">
-                    <div class="ml-4">
-                        <h3 class="text-xl font-bold text-gray-900">${name}</h3>
-                        <p class="text-gray-600">${job}</p>
-                        <div class="flex items-center mt-2">
-                            ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}
+            {% for review in reviews %}
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <img class="w-12 h-12 rounded-full object-cover" src="{{ url_for('static', filename='uploads/' ~ review.avatar) }}" alt="{{ review.name }}">
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold text-gray-900">{{ review.name }}</h3>
+                            <p class="text-gray-600">{{ review.job }}</p>
+                            <div class="flex items-center mt-2">
+                                {% for i in range(5) %}
+                                    {% if i < review.rating|round %}
+                                        <i class="fas fa-star text-yellow-500"></i>
+                                    {% elif i + 0.5 == review.rating %}
+                                        <i class="fas fa-star-half-alt text-yellow-500"></i>
+                                    {% else %}
+                                        <i class="far fa-star text-yellow-500"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
+                    <p class="text-gray-700">{{ review.review }}</p>
                 </div>
-                <p class="text-gray-700">${review}</p>
-            `;
-            reviewsContainer.appendChild(reviewDiv);
-        }
-    </script>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

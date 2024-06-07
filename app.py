@@ -274,7 +274,7 @@ def submit_review():
         'name': request.form.get('name'),
         'job': request.form.get('job'),
         'avatar': avatar_filename,
-        'rating': request.form.get('rating'),
+        'rating': float(request.form.get('rating')),
         'review': request.form.get('review')
     }
     
