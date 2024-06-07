@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMzFn2H1pt2OXoQRoTflA5VEO1pAJfF18B3v8T9" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='review.js') }}"></script>
 </head>
 <body class="bg-gray-100">
@@ -17,11 +16,11 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='images/icon.svg') }}"></a>
+			    <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='images/icon.svg') }}"></a>
                     </div>
                 </div>
                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
-                    <a href="{{ url_for('dashboard') }}" class="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+			<a href="{{ url_for('dashboard') }}" class="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
                 </div>
             </div>
         </div>
@@ -67,54 +66,59 @@
 
         <div id="reviews-container" class="grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
             <!-- Existing reviews go here -->
-            {% for review in reviews %}
             <div class="bg-white p-6 rounded-lg shadow-lg">
                 <div class="flex items-center mb-4">
-                    <img class="w-12 h-12 rounded-full object-cover" src="{{ review.avatar }}" alt="avatar">
+                    <img class="w-12 h-12 rounded-full object-cover" src="moon.jpg" alt="moon">
                     <div class="ml-4">
-                        <h3 class="text-xl font-bold text-gray-900">{{ review.name }}</h3>
-                        <p class="text-gray-600">{{ review.job }}</p>
+                        <h3 class="text-xl font-bold text-gray-900">Gabby</h3>
+                        <p class="text-gray-600">Software engineer</p>
                         <div class="flex items-center mt-2">
-                            {% for _ in range(review.rating | int) %}
                             <i class="fas fa-star text-yellow-500"></i>
-                            {% endfor %}
-                            {% if review.rating % 1 %}
-                            <i class="fas fa-star-half-alt text-yellow-500"></i>
-                            {% endif %}
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
                         </div>
                     </div>
                 </div>
-                <p class="text-gray-700">{{ review.review }}</p>
+                <p class="text-gray-700">This is a fantastic site! I've been using it for a while and it has greatly inspired me to improve in my workflows.</p>
             </div>
-            {% endfor %}
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img class="w-12 h-12 rounded-full object-cover" src="star.jpg" alt="star">
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-900">Dayo</h3>
+                        <p class="text-gray-600">Directorate</p>
+                        <div class="flex items-center mt-2">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star-half-alt text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700">Amazing service! The quotes motivated me to keep going and never give up hope.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="flex items-center mb-4">
+                    <img class="w-12 h-12 rounded-full object-cover" src="sky.jpg" alt="sky">
+                    <div class="ml-4">
+                        <h3 class="text-xl font-bold text-gray-900">Emmanuel</h3>
+                        <p class="text-gray-600">Evangelist</p>
+                        <div class="flex items-center mt-2">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700">Highly recommend this product! It exceeded my expectations and the quality is top-notch.</p>
+            </div>
         </div>
     </div>
-    
-    <script>
-        $(document).ready(function() {
-            $('#review-form').on('submit', function(event) {
-                event.preventDefault();
-                const reviewData = {
-                    name: $('#name').val(),
-                    job: $('#job').val(),
-                    avatar: $('#avatar').val(),
-                    rating: $('#rating').val(),
-                    review: $('#review').val()
-                };
-
-                $.ajax({
-                    url: '/submit_review',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(reviewData),
-                    success: function(response) {
-                        if (response.success) {
-                            location.reload();
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
+

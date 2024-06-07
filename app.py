@@ -10,6 +10,7 @@ from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from functools import wraps
 import requests
 import psycopg2
+import json
 import os
 
 app = Flask(__name__)
@@ -22,6 +23,7 @@ app.config['MAIL_USERNAME'] = 'email'
 app.config['MAIL_PASSWORD'] = 'yourpassword'
 push_service = FCMNotification(api_key="your_firebase_server_key")
 
+REVIEWS_FILE = 'reviews.json'
 quotes = []
 
 db = SQLAlchemy(app)
@@ -220,7 +222,8 @@ def about():
 
 @app.route('/review')
 def review():
-    return render_template('review.html')
+    reviews = load_reviews()
+    return render_template('review.html', reviews=reviews)
 
 
 @app.route('/send-notification', methods=['POST'])
@@ -243,6 +246,27 @@ def send_push_notification():
     result = push_service.notify_single_device(**message)
     print(result)
     return jsonify({"message": "Notification sent successfully"}), 200
+
+
+def load_reviews():
+    if os.path.exists(REVIEWS_FILE):
+        with open(REVIEWS_FILE, 'r') as file:
+            return json.load(file)
+    return {}
+
+
+def save_reviews(reviews):
+    with open(REVIEWS_FILE, 'w') as file:
+        json.dump(reviews, file)
+
+
+@app.route('/submit_review', methods=['POST'])
+def submit_review():
+    review = request.get_json()
+    reviews = load_reviews()
+    reviews.append(review)
+    save_reviews(reviews)
+    return jsonify({'success': True})
 
 
 if __name__ == '__main__':
