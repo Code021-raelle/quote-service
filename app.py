@@ -21,6 +21,7 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'email'
 app.config['MAIL_PASSWORD'] = 'yourpassword'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 push_service = FCMNotification(api_key="your_firebase_server_key")
 
 REVIEWS_FILE = 'reviews.json'
@@ -262,15 +263,17 @@ def save_reviews(reviews):
 
 @app.route('/submit_review', methods=['POST'])
 def submit_review():
+    avatar_filename = ''
     if 'avatar' in request.files:
         avatar = request.files['avatar']
         if avatar.filename != '':
-            avatar.save(os.path.join('static/uploads', avatar.filename))
-    
+            avatar_filename = avatar.filename
+            avatar.save(os.path.join(app.config['UPLOAD_FOLDER'], avatar_filename))
+
     review = {
         'name': request.form.get('name'),
         'job': request.form.get('job'),
-        'avatar': avatar.filename if 'avatar' in request.files else '',  # Save the filename
+        'avatar': avatar_filename,
         'rating': request.form.get('rating'),
         'review': request.form.get('review')
     }
