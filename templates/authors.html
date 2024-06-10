@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Introduction</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="icon/svg" href="{{ url_for('static', filename='images/icon.svg') }}">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="{{ url_for('dashboard') }}"><img src="{{ url_for('static', filename='images/icon.svg') }}" alt="Logo"></a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <a href="{{ url_for('dashboard') }}" class="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold text-gray-900">Project Introduction</h1>
+                <p class="mt-4 text-xl text-gray-600">Learn more about our team, the inspiration behind our project, and its features.</p>
+            </div>
+
+            <!-- Video Section -->
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-gray-900">Watch Our Video</h2>
+                <div class="mt-4">
+                    <video class="w-full h-auto" controls>
+                        <source src="path/to/your/video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <!-- Team Members Section -->
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-gray-900">Meet the Team</h2>
+                <div class="mt-4 grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+                    <div class="bg-white text-center p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-gray-900">Gabriel Akinshola (Code021-raelle)</h3>
+                        <p class="mt-2 text-gray-600">I Aspire to Inspire before I Expire</p>
+                        <ul class="mt-2 text-gray-600">
+                            <li><a href="https://github.com/Code021-raelle" target="_blank" class="text-blue-500 hover:underline">GitHub</a></li>
+                            <li><a href="https://linkedin.com/in/gabriel-akinshola" target="_blank" class="text-blue-500 hover:underline">LinkedIn</a></li>
+                            <li><a href="https://x.com/gabbyextra" target="_blank" class="text-blue-500 hover:underline">Twitter</a></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white text-center p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-gray-900">Adedayo Oshinnaiye (oshybobo)</h3>
+                        <p class="mt-2 text-gray-600">A brief introduction about your partner.</p>
+                        <ul class="mt-2 text-gray-600">
+                            <li><a href="https://github.com/oshybobo" target="_blank" class="text-blue-500 hover:underline">GitHub</a></li>
+                            <li><a href="https://linkedin.com/in/partner-linkedin-username" target="_blank" class="text-blue-500 hover:underline">LinkedIn</a></li>
+                            <li><a href="https://twitter.com/partner-twitter-username" target="_blank" class="text-blue-500 hover:underline">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inspiration Story Section -->
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-gray-900">Our Inspiration</h2>
+                <p class="mt-4 text-gray-600">Explain the story of what inspired your project.</p>
+            </div>
+
+            <!-- Features Section -->
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-gray-900">Key Features</h2>
+                <div class="mt-4 grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-gray-900">Feature 1</h3>
+                        <p class="mt-2 text-gray-600">Describe the first feature of your project.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-gray-900">Feature 2</h3>
+                        <p class="mt-2 text-gray-600">Describe the second feature of your project.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-gray-900">Feature 3</h3>
+                        <p class="mt-2 text-gray-600">Describe the third feature of your project.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Plans Section -->
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-gray-900">What's Next</h2>
+                <p class="mt-4 text-black-600">Talk about what comes next for your project.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-lg mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <p class="text-black-600 text-center">CITA | &copy; 2024 All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

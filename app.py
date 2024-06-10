@@ -227,6 +227,11 @@ def review():
     return render_template('review.html', reviews=reviews)
 
 
+@app.route('/authors')
+def authors():
+    return render_template('authors.html')
+
+
 @app.route('/send-notification', methods=['POST'])
 def send_push_notification():
     data = request.get_json()
