@@ -257,13 +257,16 @@ def send_push_notification():
 def load_reviews():
     if os.path.exists(REVIEWS_FILE):
         with open(REVIEWS_FILE, 'r') as file:
-            return json.load(file)
-    return {}
+            reviews = json.load(file)
+            print("Loaded reviews:", reviews)
+            return reviews
+    return []
 
 
 def save_reviews(reviews):
     with open(REVIEWS_FILE, 'w') as file:
-        json.dump(reviews, file)
+        json.dump(reviews, file, indent=4)
+    print("Saved reviews:", reviews)
 
 
 @app.route('/submit_review', methods=['POST'])
@@ -291,4 +294,4 @@ def submit_review():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
