@@ -15,7 +15,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gabson'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hbnb_dev:ezzicZloooY65xKOArE6e03bfoXT4n77@dpg-cpctfplds78s738t12j0-a.oregon-postgres.render.com/hbnb_dev_db';
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hbnb_dev:ezzicZloooY65xKOArE6e03bfoXT4n77@dpg-cpctfplds78s738t12j0-a.oregon-postgres.render.com/hbnb_dev_db'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -32,6 +32,13 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 mail = Mail(app)
 s = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+
+
+@app.template_filter('to_int')
+def to_int(value):
+    return int(value)
+
+app.jinja_env.filters['to_int'] = to_int
 
 
 #def admin_required(f):
@@ -146,6 +153,25 @@ def register():
     return render_template('register.html', form=form)
 
 
+@app.route('/profile')
+@login_required
+def profile():
+    user = User.query.get(current_user.id)
+    return render_template('profile.html', user=user)
+
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    user = User.query.get(current_user.id)
+    if request.method == 'POST':
+        user.email = request.form.get('email')
+        db.session.commit()
+        flash('Profile updated successfully.', 'success')
+        return redirect(url_for('profile'))
+    return render_template('edit_profile.html', user=user)
+
+
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
     if request.method == 'POST':
@@ -228,8 +254,8 @@ def review():
 
 
 @app.route('/authors')
-def authors():
-    return render_template('authors.html')
+def features():
+    return render_template('features.html')
 
 
 @app.route('/send-notification', methods=['POST'])
@@ -255,12 +281,14 @@ def send_push_notification():
 
 
 def load_reviews():
-    if os.path.exists(REVIEWS_FILE):
-        with open(REVIEWS_FILE, 'r') as file:
-            reviews = json.load(file)
-            print("Loaded reviews:", reviews)
-            return reviews
-    return []
+    try:
+        with open(REVIEWS_FILE, 'r') as f:
+            reviews = json.load(f)
+        return reviews
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        return []
 
 
 def save_reviews(reviews):
@@ -294,4 +322,4 @@ def submit_review():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
