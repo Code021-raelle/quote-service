@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask import Flask, render_template, jsonify, redirect, url_for, flash, request, abort
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
-from forms import LoginForm, RegistrationForm
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
+from forms import LoginForm, RegistrationForm, ForgotPasswordForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from pyfcm import FCMNotification
@@ -174,20 +174,23 @@ def edit_profile():
 
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
-    if request.method == 'POST':
-        email = request.form.get('email')
+    form = ForgotPasswordForm()
+    if form.validate_on_submit():
+        email = form.email.data
         user = User.query.filter_by(email=email).first()
         if user:
             token = s.dumps(email, salt='password-reset-salt')
             link = url_for('reset_password', token=token, _external=True)
-            msg = Message('Password Reset Request', sender='noreply@demo.com', recipients=[email])
+            msg = Message('Password Reset Request',
+                          sender='your-email@example.com',
+                            recipients=[email])
             msg.body = f'Your link to reset your password is {link}. This link will expire in 1 hour.'
             mail.send(msg)
             flash('A password reset link has been sent to your email.', 'info')
         else:
             flash('No account found with that email.', 'warning')
         return redirect(url_for('forgot_password'))
-    return render_template('forgot_password.html')
+    return render_template('forgot_password.html', form=form)
 
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
@@ -207,7 +210,6 @@ def reset_password(token):
             db.session.commit()
             flash('Your password has been updated!', 'success')
             return redirect(url_for('login'))
-
     return render_template('reset_password.html')
 
 
@@ -253,7 +255,7 @@ def review():
     return render_template('review.html', reviews=reviews)
 
 
-@app.route('/authors')
+@app.route('/features')
 def features():
     return render_template('features.html')
 

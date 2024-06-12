@@ -17,7 +17,7 @@
 	text-decoration: none;
 }
 body {
-	font-family: 'Poppins';
+	font-family: 'Georgia';
 	text-align: center;
 	margin: 0;
 	padding: 0;
@@ -38,6 +38,15 @@ body {
 .navbar {
 	position: sticky;
 }*/
+.navbar,
+.navbar-collapse,
+.navbar-nav {
+	color: blue;
+}
+.mr-auto, .nav-item {
+	text-align: center;
+	display: inline-block;
+}
 .container {
 	width: 100%;
 	height: 100%;
