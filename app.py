@@ -219,6 +219,86 @@ def fetch_quote():
     quotes.append(quote)
 
 
+@app.route('/inspiration')
+def inspiration():
+    response = requests.get('https://zenquotes.io/api/quotes/inspiration')
+    inspiration_quote = response.json()[0]['q']
+    quotes.append(inspiration_quote)
+    return render_template('inspiration.html', inspiration_quote=quotes[-1])
+
+
+@app.route('/motivation')
+def motivation():
+    response = requests.get('https://zenquotes.io/api/quotes/motivation')
+    motivation_quote = response.json()[0]['q']
+    quotes.append(motivation_quote)
+    return render_template('motivation.html', motivation_quote=quotes[-1])
+
+
+@app.route('/emotional')
+def emotional():
+    response = requests.get('https://zenquotes.io/api/quotes/emotional')
+    emotional_quote = response.json()[0]['q']
+    quotes.append(emotional_quote)
+    return render_template('emotional.html', emotional_quote=quotes[-1])
+
+
+@app.route('/happiness')
+def happiness():
+    response = requests.get('https://zenquotes.io/api/quotes/happiness')
+    happiness_quote = response.json()[0]['q']
+    quotes.append(happiness_quote)
+    return render_template('happiness.html', happiness_quote=quotes[-1])
+
+
+@app.route('/moody')
+def moody():
+    response = requests.get('https://zenquotes.io/api/quotes/moody')
+    moody_quote = response.json()[0]['q']
+    quotes.append(moody_quote)
+    return render_template('moody.html', moody_quote=quotes[-1])
+
+
+@app.route('/strength')
+def strength():
+    response = requests.get('https://zenquotes.io/api/quotes/strength')
+    strength_quote = response.json()[0]['q']
+    quotes.append(strength_quote)
+    return render_template('strength.html', strength_quote=quotes[-1])
+
+
+@app.route('/sad')
+def sad():
+    response = requests.get('https://zenquotes.io/api/quotes/sad')
+    sad_quote = response.json()[0]['q']
+    quotes.append(sad_quote)
+    return render_template('sad.html', sad_quote=quotes[-1])
+
+
+@app.route('/float')
+def float():
+    response = requests.get('https://zenquotes.io/api/quotes/float')
+    float_quote = response.json()[0]['q']
+    quotes.append(float_quote)
+    return render_template('float.html', float_quote=quotes[-1])
+
+
+@app.route('/spiritual')
+def spiritual():
+    response = requests.get('https://zenquotes.io/api/quotes/spiritual')
+    spiritual_quote = response.json()[0]['q']
+    quotes.append(spiritual_quote)
+    return render_template('spiritual.html', spiritual_quote=quotes[-1])
+
+
+@app.route('/energetic')
+def energetic():
+    response = requests.get('https://zenquotes.io/api/quotes/energetic')
+    energetic_quote = response.json()[0]['q']
+    quotes.append(energetic_quote)
+    return render_template('energetic.html', energetic_quote=quotes[-1])
+
+
 @app.route('/')
 def dashboard():
     return render_template('dashboard.html')
