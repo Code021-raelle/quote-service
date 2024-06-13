@@ -42,7 +42,7 @@
 					<a class="dropdown-item" href="{{ url_for('inspiration') }}">Inspiration</a>
 					<a class="dropdown-item" href="{{ url_for('motivation') }}">Motivation</a>
 					<a class="dropdown-item" href="{{ url_for('emotional') }}">Emotional</a>
-					<a class="dropdown-item" href="{{ url_for('hapiness') }}">Hapiness</a>
+					<a class="dropdown-item" href="{{ url_for('happiness') }}">Happiness</a>
 					<a class="dropdown-item" href="{{ url_for('moody') }}">Moody</a>
 					<a class="dropdown-item" href="{{ url_for('strength') }}">Strength</a>
 					<a class="dropdown-item" href="{{ url_for('sad') }}">Sad</a>
@@ -54,7 +54,7 @@
 		</div>
 	</nav>
 
-	<!--alert>
+	<div id="flash-message-container">
 		{% with messages = get_flashed_messages() %}
 	    	{% if messages %}
 	        	<ul class="flash-messages">
@@ -64,7 +64,7 @@
 				</ul>
 	   		{% endif %}
 		{% endwith %}
-	</alert-->
+	</div>
 
 	<div class="center-container-index">
 	   <div class="container-home">

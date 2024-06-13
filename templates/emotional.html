@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='category.css') }}">
 	<link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
@@ -12,6 +12,16 @@
 	<script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body class="gradient-background">
+	<style>
+        body {
+            font-family: 'Georgia';
+	        background: url('../static/images/login.svg') no-repeat;
+	        background-size: cover;
+	        background-attachment: fixed;
+	        background-position: center;
+        }
+    </style>
+	
 	<nav class="navbar navbar-expand-lg bg-dark">
 		<a class="navbar-brand" href="{{ url_for('dashboard') }}">
 			<img src="{{ url_for('static', filename='images/icon.svg') }}" alt="Logo" style="height: 40px;">
@@ -69,7 +79,7 @@
 	<div class="center-container-index">
 	   <div class="container-home">
 		   <h1 class="title">C<i>iTa</i></h1>
-		   <p id="quote">{{ emotional_quote }}</p>
+		   <p id="quote">{{ quote }}</p>
 				   <button id="prevBtn">prev</button>
 				   <button id="nextBtn">next</button>
 				   <!--<i class="bi bi-type" id="fontToggle" style="cursor: pointer;"></i>-->

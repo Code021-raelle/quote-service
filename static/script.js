@@ -13,6 +13,13 @@ $(document).ready(function() {
 	});
 });
 
+// Add timeout for flash messages
+$(document).ready(function() {
+	setTimeout(function() {
+		$('.flash-messages').fadeOut('slow');
+	}, 3000); // 3000 milliseconds = 3 seconds
+})
+
 // Add event listeners for keydown events
 document.addEventListener('keydown', function(event) {
 	if (event.key === 'ArrowRight') {
