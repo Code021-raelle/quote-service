@@ -21,7 +21,7 @@ body {
 	text-align: center;
 	margin: 0;
 	padding: 0;
-	background-color: #f4f4f4;
+	/*background-color: #f4f4f4;*/
 }
 /*nav {
 	background-color: #fff;
@@ -164,7 +164,7 @@ a {
 	color: #007bff;
 }
 
-@keyframes rotateGradient {
+/*@keyframes rotateGradient {
 	0% {background-position: 0% 50%;}
 	100% {background-position: 100% 50%;}
 }
@@ -174,7 +174,7 @@ a {
 	background: linear-gradient(90deg, #E2D280, #ff7e5f, #feb47b);
 	background-size: 200% 200%;
 	animation: rotateGradient 10s ease infinite;
-}
+}*/
 
 /* Media Queries for Responsiveness */
 

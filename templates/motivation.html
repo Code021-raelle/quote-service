@@ -15,12 +15,15 @@
 	<style>
         body {
             font-family: 'Georgia';
-	        background: url('../static/images/login.svg') no-repeat;
+	        background: url('../static/images/motivation.svg') no-repeat;
 	        background-size: cover;
 	        background-attachment: fixed;
 	        background-position: center;
         }
-    </style>
+		/*.container-home {
+			background-color: #0D122C;
+		}*/
+	</style>
 	
 	<nav class="navbar navbar-expand-lg bg-dark">
 		<a class="navbar-brand" href="{{ url_for('dashboard') }}">
@@ -89,6 +92,25 @@
 
 	<a href="{{ url_for('logout') }}">Logout</a>
 
+	<script>
+		document.getElementById('bg1').addEventListener('transitionend', () => {
+			document.getElementById('bg1').style.opacity = '0';
+			document.getElementById('bg2').style.opacity = '1';
+		});
+  
+		document.getElementById('bg2').addEventListener('transitionend', () => {
+			document.getElementById('bg2').style.opacity = '0';
+			document.getElementById('bg3').style.opacity = '1';
+		});
+		document.getElementById('bg3').addEventListener('transitionend', () => {
+			document.getElementById('bg3').style.opacity = '0';
+			document.getElementById('bg4').style.opacity = '1';
+		});
+		document.getElementById('bg4').addEventListener('transitionend', () => {
+			document.getElementById('bg4').style.opacity = '0';
+			document.getElementById('bg1').style.opacity = '1';
+		});
+	</script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
