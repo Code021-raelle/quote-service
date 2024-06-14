@@ -28,31 +28,3 @@ document.addEventListener('keydown', function(event) {
 		document.getElementById('prevBtn').click();
 	}
 });
-
-let currentFontStyle = 0;
-const fontStyles = ['font-style-1', 'font-style-2', 'font-style-3'];
-
-document.getElementById('fontToggle').addEventListener('click', () => {
-	const quoteContainer = document.getElementById('quoteContainer');
-	quoteContainer.classList.remove(...fontStyles);
-	currentFontStyle = (currentFontStyle + 1) % fontStyle.length;
-	quoteContainer.classList.add(fontStyle[currentFontStyle]);
-});
-
-document.getElementById('bg1').addEventListener('transitionend', () => {
-	document.getElementById('bg1').style.opacity = '0';
-	document.getElementById('bg2').style.opacity = '1';
-});
-  
-document.getElementById('bg2').addEventListener('transitionend', () => {
-	document.getElementById('bg2').style.opacity = '0';
-	document.getElementById('bg3').style.opacity = '1';
-});
-document.getElementById('bg3').addEventListener('transitionend', () => {
-	document.getElementById('bg3').style.opacity = '0';
-	document.getElementById('bg4').style.opacity = '1';
-});
-document.getElementById('bg4').addEventListener('transitionend', () => {
-	document.getElementById('bg4').style.opacity = '0';
-	document.getElementById('bg1').style.opacity = '1';
-});

@@ -115,7 +115,7 @@ button {
 	justify-content: space-between;
 	border: none;
 	font-family: 'Poppins';
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 #prevBtn:hover {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
@@ -159,6 +159,9 @@ button {
 }
 .flash-messages .success {
 	color: #28a745;
+}
+.flash-messages .info {
+	color: #17a2b8;
 }
 a {
 	color: #007bff;

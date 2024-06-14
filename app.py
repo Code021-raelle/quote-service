@@ -1,27 +1,31 @@
 #!/usr/bin/python3
 from flask import Flask, render_template, jsonify, redirect, url_for, flash, request, abort
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
-from forms import LoginForm, RegistrationForm, ForgotPasswordForm
+from forms import LoginForm, RegistrationForm, ForgotPasswordForm, ResetPasswordForm
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from pyfcm import FCMNotification
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
+from dotenv import load_dotenv
 from functools import wraps
 import requests
 import psycopg2
 import json
 import os
 
+# Load environment variables from .env file
+load_dotenv()
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'gabson'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hbnb_dev:ezzicZloooY65xKOArE6e03bfoXT4n77@dpg-cpctfplds78s738t12j0-a.oregon-postgres.render.com/hbnb_dev_db'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'email'
-app.config['MAIL_PASSWORD'] = 'yourpassword'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 push_service = FCMNotification(api_key="your_firebase_server_key")
 
@@ -186,7 +190,7 @@ def forgot_password():
             token = s.dumps(email, salt='password-reset-salt')
             link = url_for('reset_password', token=token, _external=True)
             msg = Message('Password Reset Request',
-                          sender='your-email@example.com',
+                            sender=app.config['MAIL_USERNAME'],
                             recipients=[email])
             msg.body = f'Your link to reset your password is {link}. This link will expire in 1 hour.'
             mail.send(msg)
@@ -202,12 +206,15 @@ def reset_password(token):
     try:
         email = s.loads(token, salt='password-reset-salt', max_age=3600)
     except SignatureExpired:
-        return '<h1>The token is expired!</h1>'
+        flash('The token has expired. Please try again.', 'warning')
+        return redirect(url_for('forgot_password'))
     except BadSignature:
-        return '<h1>Invalid token!</h1>'
+        flash('Invalid token. Please try again.', 'danger')
+        return redirect(url_for('forgot_password'))
 
-    if request.method == 'POST':
-        password = request.form.get('password')
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        password = form.password.data
         user = User.query.filter_by(email=email).first()
         if user:
             user.set_password(password)

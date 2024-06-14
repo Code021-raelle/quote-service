@@ -14,15 +14,23 @@
 <body class="gradient-background">
 	<style>
         body {
+			color: #fff;
             font-family: 'Georgia';
 	        background: url('../static/images/motivation.svg') no-repeat;
 	        background-size: cover;
 	        background-attachment: fixed;
 	        background-position: center;
         }
-		/*.container-home {
-			background-color: #0D122C;
-		}*/
+		.container-home {
+			background-color: #5131D2;
+		}
+		#prevBtn, #nextBtn {
+			background-color: #5131D2;
+			color: #fff;
+		}
+		h1 {
+			color: #fff;
+		}
 	</style>
 	
 	<nav class="navbar navbar-expand-lg bg-dark">
@@ -67,50 +75,33 @@
 		</div>
 	</nav>
 
-	<!--alert>
+	<alert>
 		{% with messages = get_flashed_messages() %}
 	    	{% if messages %}
 	        	<ul class="flash-messages">
 		    		{% for message in messages %}
 		        		<li class="success">{{ message }}</li>
+					{% else %}
+						<li class="error">{{ message }}</li>
 		    		{% endfor %}
 				</ul>
 	   		{% endif %}
 		{% endwith %}
-	</alert-->
+	</alert>
 
 	<div class="center-container-index">
-	   <div class="container-home">
-		   <h1 class="title">C<i>iTa</i></h1>
-		   <p id="quote">{{ quote }}</p>
-				   <button id="prevBtn">prev</button>
-				   <button id="nextBtn">next</button>
-				   <!--<i class="bi bi-type" id="fontToggle" style="cursor: pointer;"></i>-->
-	   </div>
+		<div class="container-home">
+			<h1 class="title">C<i>iTa</i></h1>
+			<p id="quote">{{ quote }}</p>
+			<button id="prevBtn">prev</button>
+			<button id="nextBtn">next</button>
+			<!--<i class="bi bi-type" id="fontToggle" style="cursor: pointer;"></i>-->
+		</div>
 	</div>
 
 
 	<a href="{{ url_for('logout') }}">Logout</a>
-
-	<script>
-		document.getElementById('bg1').addEventListener('transitionend', () => {
-			document.getElementById('bg1').style.opacity = '0';
-			document.getElementById('bg2').style.opacity = '1';
-		});
-  
-		document.getElementById('bg2').addEventListener('transitionend', () => {
-			document.getElementById('bg2').style.opacity = '0';
-			document.getElementById('bg3').style.opacity = '1';
-		});
-		document.getElementById('bg3').addEventListener('transitionend', () => {
-			document.getElementById('bg3').style.opacity = '0';
-			document.getElementById('bg4').style.opacity = '1';
-		});
-		document.getElementById('bg4').addEventListener('transitionend', () => {
-			document.getElementById('bg4').style.opacity = '0';
-			document.getElementById('bg1').style.opacity = '1';
-		});
-	</script>
+	
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

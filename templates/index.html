@@ -63,17 +63,19 @@
 		</div>
 	</nav>
 
-	<div id="flash-message-container">
+	<alert>
 		{% with messages = get_flashed_messages() %}
 	    	{% if messages %}
 	        	<ul class="flash-messages">
 		    		{% for message in messages %}
 		        		<li class="success">{{ message }}</li>
+					{% else %}
+						<li class="error">{{ message }}</li>
 		    		{% endfor %}
 				</ul>
 	   		{% endif %}
 		{% endwith %}
-	</div>
+	</alert>
 
 	<div class="center-container-index">
 	   <div class="container-home">

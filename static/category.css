@@ -37,11 +37,16 @@ body {
 }
 .navbar {
 	position: sticky;
-}*/
+}*
 .navbar,
 .navbar-collapse,
 .navbar-nav {
 	color: blue;
+}*/
+.navbar,
+.navbar-collapse,
+.navbar-nav::after {
+	color: rgb(4, 4, 95);
 }
 .mr-auto, .nav-item {
 	text-align: center;
