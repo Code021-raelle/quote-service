@@ -20,6 +20,7 @@ psycopg2==2.9.9
 psycopg2-binary==2.9.9
 pyfcm==1.5.4
 PyMySQL==1.1.1
+python-dotenv==1.0.1
 requests==2.32.3
 SQLAlchemy==2.0.30
 typing_extensions==4.12.0
