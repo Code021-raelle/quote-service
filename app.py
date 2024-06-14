@@ -19,7 +19,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = 'gabson'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hbnb_dev:ezzicZloooY65xKOArE6e03bfoXT4n77@dpg-cpctfplds78s738t12j0-a.oregon-postgres.render.com/hbnb_dev_db'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
