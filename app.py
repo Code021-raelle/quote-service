@@ -29,7 +29,11 @@ app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 push_service = FCMNotification(api_key="your_firebase_server_key")
 
-REVIEWS_FILE = 'reviews.json'
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'])
+
+
+reviews = []
 quotes = []
 
 db = SQLAlchemy(app)
@@ -290,14 +294,6 @@ def sad():
     return render_template('sad.html', quote=quotes[-1])
 
 
-@app.route('/float')
-def float():
-    response = requests.get('https://zenquotes.io/api/quotes/float')
-    quote = response.json()[0]['q']
-    quotes.append(quote)
-    return render_template('float.html', quote=quotes[-1])
-
-
 @app.route('/spiritual')
 def spiritual():
     response = requests.get('https://zenquotes.io/api/quotes/spiritual')
@@ -344,9 +340,32 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/review')
+@app.route('/review', methods=['GET', 'POST'])
 def review():
-    reviews = load_reviews()
+    if request.method == 'POST':
+        name = request.form['name']
+        job = request.form['job']
+        rating = float(request.form['rating'])
+        review_text = request.form['review']
+
+        avatar = None
+        if 'avatar' in request.files:
+            avatar_file = request.files['avatar']
+            if avatar_file.filename != '':
+                avatar_path = os.path.join(app.config['UPLOAD_FOLDER'], avatar_file.filename)
+                avatar_file.save(avatar_path)
+                avatar = avatar_file.filename
+
+        new_review = {
+            'name': name,
+            'job': job,
+            'avatar': avatar,
+            'rating': rating,
+            'review': review_text
+        }
+        reviews.append(new_review)
+        return redirect(url_for('review'))
+    
     return render_template('review.html', reviews=reviews)
 
 
@@ -379,19 +398,16 @@ def send_push_notification():
 
 def load_reviews():
     try:
-        with open(REVIEWS_FILE, 'r') as f:
-            reviews = json.load(f)
-        return reviews
+        with open('reviews.json', 'r') as file:
+            reviews = json.load(file)
     except FileNotFoundError:
-        return []
-    except json.JSONDecodeError:
-        return []
+        reviews = []
+    return reviews
 
 
 def save_reviews(reviews):
-    with open(REVIEWS_FILE, 'w') as file:
-        json.dump(reviews, file, indent=4)
-    print("Saved reviews:", reviews)
+    with open('reviews.json', 'w') as file:
+        json.dump(reviews, file)
 
 
 @app.route('/submit_review', methods=['POST'])

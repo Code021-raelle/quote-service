@@ -15,11 +15,22 @@
 	<style>
         body {
             font-family: 'Georgia';
-	        background: url('../static/images/login.svg') no-repeat;
+	        background: url('../static/images/sad.svg') no-repeat;
 	        background-size: cover;
 	        background-attachment: fixed;
 	        background-position: center;
         }
+		.container-home {
+			background-color: #E1222D;
+			color: #fff;
+		}
+		#prevBtn, #nextBtn {
+			background-color: #E1222D;
+			color: #fff;
+		}
+		h1 {
+			color: #fff;
+		}
     </style>
 
 	<nav class="navbar navbar-expand-lg bg-dark">
@@ -56,7 +67,6 @@
 					<a class="dropdown-item" href="{{ url_for('moody') }}">Moody</a>
 					<a class="dropdown-item" href="{{ url_for('strength') }}">Strength</a>
 					<a class="dropdown-item" href="{{ url_for('sad') }}">Sad</a>
-					<a class="dropdown-item" href="{{ url_for('float') }}">Float</a>
 					<a class="dropdown-item" href="{{ url_for('spiritual') }}">Spiritual</a>
 					<a class="dropdown-item" href="{{ url_for('energetic') }}">Energetic</a>
 				</div>
@@ -79,7 +89,7 @@
 	<div class="center-container-index">
 	   <div class="container-home">
 		   <h1 class="title">C<i>iTa</i></h1>
-		   <p id="quote">{{ sad }}</p>
+		   <p id="quote">{{ quote }}</p>
 				   <button id="prevBtn">prev</button>
 				   <button id="nextBtn">next</button>
 				   <!--<i class="bi bi-type" id="fontToggle" style="cursor: pointer;"></i>-->

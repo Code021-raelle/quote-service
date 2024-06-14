@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" type="svg/icon" href="{{ url_for('static', filename='images/icon.svg') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!--link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}"-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMzFn2H1pt2OXoQRoTflA5VEO1pAJfF18B3v8T9" crossorigin="anonymous">
     <script src="{{ url_for('static', filename='review.js') }}"></script>
 </head>
@@ -15,51 +14,54 @@
     <style>
         body {
             font-family: 'Georgia';
-	        background: url('../static/images/review.svg') no-repeat;
-	        background-size: cover;
-	        background-attachment: fixed;
-	        background-position: center;
+            background: url('../static/images/review.svg') no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .fa-star {
+            color: #ffd700;
         }
     </style>
 
     <nav class="navbar navbar-expand-lg bg-dark">
-		<a class="navbar-brand" href="{{ url_for('dashboard') }}">
-			<img src="{{ url_for('static', filename='images/icon.svg') }}" alt="Logo" style="height: 40px;">
-		</a>
-		<button class="navbar-toggler navbar-light bg-white" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon bg-white"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav m-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('dashboard') }}">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('about') }}">About</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('features') }}">Features</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('review') }}">Reviews</a>
-				</li>
-			</ul>
-			<ul class="navbar-nav mll-auto">
-				<li class="nav-item">
-					<b><a class="nav-link" href="{{ url_for('login') }}">Login</a></b>
-				</li>
-				<li class="nav-item">
-					<b><a class="nav-link" href="{{ url_for('register') }}">Sign up</a></b>
-				</li>
-			</ul>
-		</div>
-	</nav>
+        <a class="navbar-brand" href="{{ url_for('review') }}">
+            <img src="{{ url_for('static', filename='images/icon.svg') }}" alt="Logo" style="height: 40px;">
+        </a>
+        <button class="navbar-toggler navbar-light bg-white" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon bg-white"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('review') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('features') }}">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('review') }}">Reviews</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mll-auto">
+                <li class="nav-item">
+                    <b><a class="nav-link" href="{{ url_for('login') }}">Login</a></b>
+                </li>
+                <li class="nav-item">
+                    <b><a class="nav-link" href="{{ url_for('register') }}">Sign up</a></b>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Customer Reviews</h2>
-        
+
         <!-- Add Review Form -->
-        <form id="review-form" class="bg-white p-6 rounded-lg shadow-lg mb-8" enctype="multipart/form-data">
+        <form id="review-form" class="bg-white p-6 rounded-lg shadow-lg mb-8" method="POST" enctype="multipart/form-data">
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
@@ -94,69 +96,22 @@
         </form>
 
         <div id="reviews-container" class="grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="flex items-center mb-4">
-                    <img class="w-12 h-12 rounded-full object-cover" src="moon.jpg" alt="moon">
-                    <div class="ml-4">
-                        <h3 class="text-xl font-bold text-gray-900">Gabby</h3>
-                        <p class="text-gray-600">Software engineer</p>
-                        <div class="flex items-center mt-2">
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-700">This is a fantastic site! I've been using it for a while and it has greatly inspired me to improve in my workflows.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="flex items-center mb-4">
-                    <img class="w-12 h-12 rounded-full object-cover" src="star.jpg" alt="star">
-                    <div class="ml-4">
-                        <h3 class="text-xl font-bold text-gray-900">Dayo</h3>
-                        <p class="text-gray-600">Directorate</p>
-                        <div class="flex items-center mt-2">
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star-half-alt text-yellow-500"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-700">Amazing service! The quotes motivated me to keep going and never give up hope.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="flex items-center mb-4">
-                    <img class="w-12 h-12 rounded-full object-cover" src="sky.jpg" alt="sky">
-                    <div class="ml-4">
-                        <h3 class="text-xl font-bold text-gray-900">Emmanuel</h3>
-                        <p class="text-gray-600">Evangelist</p>
-                        <div class="flex items-center mt-2">
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-gray-700">Highly recommend this product! It exceeded my expectations and the quality is top-notch.</p>
-            </div>
             {% for review in reviews %}
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <div class="flex items-center mb-4">
-                        <img class="w-12 h-12 rounded-full object-cover" src="{{ url_for('static', filename='uploads/' ~ review.avatar) }}" alt="{{ review.name }}">
+                        {% if review.avatar %}
+                            <img class="w-12 h-12 rounded-full object-cover" src="{{ url_for('static', filename='uploads/' ~ review.avatar) }}" alt="{{ review.name }}">
+                        {% else %}
+                            <img class="w-12 h-12 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{ review.name }}" alt="{{ review.name }}">
+                        {% endif %}
                         <div class="ml-4">
                             <h3 class="text-xl font-bold text-gray-900">{{ review.name }}</h3>
                             <p class="text-gray-600">{{ review.job }}</p>
                             <div class="flex items-center mt-2">
-                                {% for star in range(0, review.rating|to_int) %}
+                                {% for _ in range(0, review.rating|float|int) %}
                                     <i class="fas fa-star text-yellow-500"></i>
                                 {% endfor %}
-                                {% if review.rating % 1 != 0 %}
+                                {% if review.rating|float % 1 != 0 %}
                                     <i class="fas fa-star-half-alt text-yellow-500"></i>
                                 {% endif %}
                             </div>
@@ -169,7 +124,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
