@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-Ly/AhSDZz0PqMdAuvPqiRMS1hQWtcCn2HxK5UVBtD6KtKIfN1fGA85F3bskQm6pP" crossorigin="anonymous">
     <script src="{{ url_for('static', filename='review.js') }}"></script>
+    <script src="https://kit.fontawesome.com/8074424110.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-100">
     <style>
@@ -112,7 +113,7 @@
                                     <i class="fas fa-star text-yellow-500"></i>
                                 {% endfor %}
                                 {% if review.rating|float % 1 != 0 %}
-                                    <i class="fas fa-star-half-alt text-yellow-500"></i>
+                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                                 {% endif %}
                             </div>
                         </div>
