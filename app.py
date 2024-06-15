@@ -26,7 +26,7 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = '/static/uploads/'
 push_service = FCMNotification(api_key="your_firebase_server_key")
 
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
