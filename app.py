@@ -316,7 +316,6 @@ def dashboard():
 
 
 @app.route('/home')
-@login_required
 def home():    
     fetch_quote()
     return render_template('index.html', quote=quotes[-1])
